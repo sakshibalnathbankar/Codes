@@ -1,0 +1,103 @@
+
+package Assignment3;
+
+import java.util.Scanner;
+
+public class TestKruskals 
+{
+    public static void main(String args[])
+    {
+        try
+        {
+            Scanner sc = new Scanner(System.in);
+            
+            int v=0, e=0;
+            int start=0, end=0, cost=0;
+            char c;
+            int ch=0;
+            
+           System.out.println("\nEnter the number of vertex in graph");
+            v = sc.nextInt();
+
+            if (v <= 2) 
+            {
+                while (v <= 2) 
+                {
+                    System.out.println("Enter the valid number of vertex in graph");
+                    v = sc.nextInt();
+                }
+            }
+            System.out.println("Enter the number of edges in a graph");
+            e=sc.nextInt();
+            
+            Kruskals k = new Kruskals(v);
+            int[][] edges = new int[3][e];
+            int[] set = new int[v + 1];
+            
+             int i = 0;
+            do
+            {
+                System.out.println("Enter the Start vertex, End vertex and cost");
+                start = sc.nextInt();
+                end= sc.nextInt();
+                cost = sc.nextInt();
+                                
+                edges[0][i] = start;
+                edges[1][i] = end;
+                edges[2][i] = cost;
+                
+                k.addEdge(start,end, cost);
+                i++;
+                
+                System.out.println("Do you want continue (Y/N) :");
+                c = sc.next().charAt(0);
+            }while(c=='y'||c=='Y');
+            
+            do
+            {
+                System.out.println("\n1- Matrix Representation");
+                System.out.println("2- Minimum Cost Spanning Tree");
+                System.out.println("3- END");
+                
+                System.out.println("Enter your choice : ");
+                ch = sc.nextInt();
+                
+                switch(ch)
+                {
+                    case 1:
+                        if(v==0)
+                        {
+                            System.out.println("NULL GRAPH");
+                        }
+                        else
+                        {
+                            System.out.println("\nMATRIX REPRESENTATION");
+                            //k.display();
+                        }
+                        break; 
+                        
+                    case 2:
+                        System.out.println("\nMST PATHS");
+                        for (int j = 0; j <= v; j++) {
+                            set[j] = -1;
+                        }
+                        int[][] result = new int[2][v - 1]; 
+                        k.Kruskal(edges, set, result, e, v);
+                        break;
+                        
+                    case 3:
+                        System.out.println("Thank You");
+                        break;
+                        
+                    default:
+                        System.out.println("Enter valid choice");
+                }
+            }while(ch!=3);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception : "+e);
+        }
+    }
+   
+}
