@@ -1,0 +1,36 @@
+package NewBellman;
+
+import java.util.*;
+
+public class TestBellmanFord {
+
+    public static void main(String[] args) {
+        System.out.println("-----------Bellman Ford--------------");
+        Scanner scan = new Scanner(System.in);
+        int V, E;
+        System.out.println("Enter no of Vertices : ");
+        V = scan.nextInt();
+        System.out.println("Enter no of Edges : ");
+        E = scan.nextInt();
+
+        BellmanFord b = new BellmanFord();
+
+        ArrayList<StoreVertex> list = new ArrayList<StoreVertex>();
+
+        for (int i = 0; i < E; i++) 
+        {
+            System.out.println("Enter source , destination and weight : ");
+            int s = scan.nextInt();
+            int d = scan.nextInt();
+            int w = scan.nextInt();
+            StoreVertex s1 = new StoreVertex(s, d, w);
+            list.add(s1);
+        }
+
+        System.out.println("Enter source : ");
+        int src = scan.nextInt();
+
+        b.bellmanFord(list, V, src);
+        scan.close();
+    }
+}
