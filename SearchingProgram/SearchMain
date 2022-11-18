@@ -1,0 +1,97 @@
+package SearchingPrograms;
+
+import SortingPrograms.Sort;
+import java.util.Scanner;
+
+public class SearchMain 
+{
+
+    public static void main(String args[]) 
+    {
+        try 
+        {
+            Scanner sc = new Scanner(System.in);
+            Search s = new Search();
+
+            char c = ' ';
+
+            do
+           {
+                System.out.println("\nEnter the size of the array");
+                int size = sc.nextInt();
+
+                if (size <= 0) 
+                {
+                    while (size <= 0) 
+                    {
+                        System.out.println("\nEnter the size of the array");
+                        size = sc.nextInt();
+                    }
+
+                }
+
+                int[] arr = new int[size];
+
+                System.out.println("\nEnter the elements of an array : ");
+                for (int i = 0; i < size; i++) 
+                {
+                    arr[i] = sc.nextInt();
+                }
+
+                System.out.println("\nEnter the element to be search ");
+                int ele = sc.nextInt();
+
+                System.out.println("\n1-Linear Search ");
+                System.out.println("2-Binary Search ");
+
+                System.out.println("Enter your choice :  ");
+                int ch = sc.nextInt();
+
+                switch (ch) 
+                {
+                    case 1:
+                        int result = s.LinearSearch(arr, size, ele);
+
+                        if (result > 0) 
+                        {
+                            System.out.println("\nElement found at index : " + result);
+                        } 
+                        else 
+                        {
+                            System.out.println("\nElement not found ");
+                        }
+                        break;
+
+                    case 2:
+
+                        Sort sort = new Sort();
+                        sort.BubbleSort(arr, size);
+
+                        int result1 = s.BinarySearch(arr, size, ele);
+
+                        if (result1 == 1) 
+                        {
+                            System.out.println("\nElement found");
+                        } 
+                        else 
+                        {
+                            System.out.println("\nElement not found ");
+                        }
+                        break;
+
+                    default:
+                        System.out.println("Enter the valid choice");
+                }
+                System.out.println("Do you want to continue : (Y/N)");
+                c = sc.next().charAt(0);
+
+            } while (c == 'Y' || c == 'y');
+
+            sc.close();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e);
+        }
+    }
+}
