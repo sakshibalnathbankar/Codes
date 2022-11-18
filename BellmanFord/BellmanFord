@@ -1,0 +1,72 @@
+package NewBellman;
+
+import java.util.*;
+
+public class BellmanFord 
+{
+
+    public void bellmanFord(ArrayList<StoreVertex> list, int V, int src) 
+    {
+        int dist[] = new int[V];
+        int p[] = new int[V];
+        
+        for(int i=0;i<V;i++)
+        {
+            p[i]=src;
+        }
+
+        for (int i = 0; i < V; i++) 
+        {
+            dist[i] = 1000;
+        }
+        dist[src] = 0;
+
+        for (int i = 0; i < V - 1; i++) 
+        {
+            for (StoreVertex store : list) 
+            {
+                if (dist[store.getU()] + store.getWeight() < dist[store.getV()]) 
+                {
+                    dist[store.getV()] = dist[store.getU()] + store.getWeight();
+                    p[store.getV()] = store.getU();
+                }
+            }
+
+            System.out.println("\nIteration:"+(i + 1));
+            System.out.print("Distance : ");
+            print(dist);
+            System.out.print("Parent : ");
+            print(p);
+        }
+
+        int flag = 0;
+
+        for (StoreVertex store : list) 
+        {
+            if (dist[store.getU()] + store.getWeight() < dist[store.getV()]) 
+            {
+                flag++;
+                System.out.println("\n!!! Negative Weight Cycle");
+                break;
+            }
+        }
+
+        if (flag == 0) 
+        {
+            System.out.println("\nDistance from source " + src + " to all edges is as follows:");
+            for (int i = 0; i < V; i++) 
+            {
+                System.out.println(src + " ->  " + i + " = " + dist[i]);
+            }
+        }
+    }
+
+    public void print(int arr[]) 
+    {
+        for (int i = 0; i < arr.length; i++) 
+        {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+}
