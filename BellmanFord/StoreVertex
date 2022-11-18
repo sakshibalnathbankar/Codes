@@ -1,0 +1,29 @@
+package NewBellman;
+
+public class StoreVertex
+{
+
+    private int u, v, weight;
+
+    public StoreVertex(int s, int d, int w) 
+    {
+        this.u = s;
+        this.v = d;
+        this.weight = w;
+    }
+
+    int getU() 
+    {
+        return u;
+    }
+
+    int getV() 
+    {
+        return v;
+    }
+
+    int getWeight() 
+    {
+        return weight;
+    }
+}
