@@ -1,0 +1,77 @@
+package Prims;
+
+import java.util.*;
+
+public class TestPrims {
+
+    public static void main(String[] args) {
+        try {
+            Scanner sc = new Scanner(System.in);
+            int v = 0, ch = 0, s = 0, d = 0, c = 0, e1 = 0;
+            do {
+                System.out.println("Enter the number of vertex in graph");
+                v = sc.nextInt();
+            } while (v <= 2 || v > 10);
+
+            Prims p = new Prims(v);
+            do {
+                System.out.println("\n1- Add  Edge");
+                System.out.println("2- Representation");
+                System.out.println("3- Minimum Spanning Tree");
+                System.out.println("4- Exit");
+
+                System.out.println("Enter your choice");
+                ch = sc.nextInt();
+                switch (ch) {
+                    case 1:
+                        do {
+                            System.out.println("Enter source , destination and weight to add an edge");
+                            s = sc.nextInt();
+                            d = sc.nextInt();
+                            c = sc.nextInt();
+                        } while (s > v || s < 0 || d > v || d < 0 || s == d || c <= 0);
+                        
+                        int p1 = p.addEdge(s, d, c);
+                        
+                        if (p1 == 0) {
+                            System.out.println("Edge already present...........");
+                        } else {
+                            System.out.println("Edge added successfully...........");
+                        }
+                        break;
+
+                    case 2:
+                        if (v == 0) {
+                            System.out.println("\nNULL GRAPH");
+                        } else {
+                            System.out.println("\nMATRIX REPRESENTATION");
+                            p.display();
+                        }
+                        break;
+
+                    case 3:
+                        if (p.checkEdge() == 0) {
+                            System.out.println("No Edge in graph");
+                        } else {
+                            do {
+                                System.out.println("Enter source ");
+                                e1 = sc.nextInt();
+                            } while (e1 < 0 || e1 > v);
+                             System.out.println("\nMST PATHS");
+                            p.prims(e1);
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("ThankYou");
+                        break;
+
+                    default:
+                        System.out.println("Enter valid choice ");
+                }
+            } while (ch != 4);
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+    }
+}
