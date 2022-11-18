@@ -1,0 +1,83 @@
+package Assignment3;
+
+public class Kruskals {
+
+    int ver = 0;
+    int[][] adj;
+
+    public Kruskals(int vertex) {
+        ver = vertex;
+        adj = new int[vertex+1 ][vertex+1 ];
+    }
+
+    public void addEdge(int s, int d, int c) {
+        adj[s][d] = c;
+        adj[d][s] = c;
+    }
+
+    public void union(int u, int v, int[] set) {
+        if (set[u] < set[v]) {
+            set[u] = set[u] + set[v];
+            set[v] = u;
+        } else {
+            set[v] = set[u] + set[v];
+            set[u] = v;
+        }
+    }
+
+    public int find(int u, int[] set) {
+        while (set[u] > 0) {
+            u = set[u];
+        }
+        return u;
+    }
+
+    public void Kruskal(int[][] edges, int[] set, int[][] result, int e, int n) 
+    {
+        int i = 0;
+        int u = 0;
+        int v = 0;
+        int k = 0;
+        int min = 0;
+        int cost = 0;
+
+        int[][] temp = new int[3][e];
+
+        boolean vis[] = new boolean[e];
+        for (int j = 0; j < e; j++) {
+            vis[j] = false;
+        }
+
+        while (i < ver - 1) 
+        {
+            min = Integer.MAX_VALUE;
+            for (int j=0; j<e; j++) 
+            {
+                if (vis[j] != true && result[2][j]<min) {
+                    min = edges[2][j];
+                    u = edges[0][j];
+                    v = edges[1][j];
+                    k = j;
+                }
+            }
+
+            if (find(u, set) != find(v, set)) {
+                result[0][i] = u;
+                result[1][i] = v;
+                union(find(u, set), find(v, set), set);
+                i++;
+            }
+
+            vis[k] = true;
+        }
+        for (int j = 0; j < ver - 1; j++) {
+            System.out.println(result[0][j] + "->" + result[1][j] + " : " + adj[result[0][j]][result[1][j]]);
+        }
+        
+        for (int j = 0; j < ver - 1; j++) {
+            cost = cost + adj[result[0][j]][result[1][j]];
+        }
+         System.out.println("Minimum Cost : "+cost);
+    }
+
+}
