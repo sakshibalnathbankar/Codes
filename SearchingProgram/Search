@@ -1,0 +1,50 @@
+package SearchingPrograms;
+
+public class Search 
+{
+
+    //Linear Search
+    public int LinearSearch(int[] a, int n, int k) 
+    {
+        int flag = 0;
+        for (int i = 0; i < n; i++) 
+        {
+            if (a[i] == k) 
+            {
+                flag = i;
+                i = n;
+            }
+        }
+        return flag;
+    }
+
+    //Binary Search
+    public int BinarySearch(int[] a, int n, int k) 
+    {
+        int flag = 0;
+        int l = 0;
+        int h = n - 1;
+        int mid = 0;
+
+        while (l <= h) 
+        {
+            mid = (l + h) / 2;
+
+            if (a[mid] == k) 
+            {
+                flag = 1;
+                l = h + 1;
+            } 
+            else if (a[mid] > k) 
+            {
+                h = mid - 1;
+            } 
+            else 
+            {
+                l = mid + 1;
+            }
+        }
+        return flag;
+
+    }
+}
